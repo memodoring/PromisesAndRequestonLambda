@@ -9,7 +9,7 @@ exports.handler = function(event, context) {
   //console.log('TEST');
   //readFile('sample.txt','utf8').then(console.log);
   //readFile('sample.txt','utf8').then(logTest).then(console.log);
-  //readFile('sample.txt','utf8').then(logTest).then(context.succeed);
+  readFile('sample.txt','utf8').then(logTest);
   //requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(console.log).catch(console.log);
   //requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(context.succeed(event.key3)).catch(console.log);
 
