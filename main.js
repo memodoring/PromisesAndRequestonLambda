@@ -1,13 +1,7 @@
-console.log('Loading function!');
+
 var fs = require('fs');
 var Promise = require('promise');
 var request = require('request');
-
-
-//readFile('sample.txt','utf8').then(logTest).then(console.log);
-//readFile('sample.txt','utf8').then(console.log);
-// requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(console.log).catch(console.log);
-// requestPage('http://www.google.com').then(logTest).then(console.log).catch(console.log);
 
 
 exports.handler = function(event, context) {
@@ -19,8 +13,8 @@ exports.handler = function(event, context) {
   //requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(console.log).catch(console.log);
   //requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(context.succeed(event.key3)).catch(console.log);
 
-  requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).then(context.succeed).catch(context.fail);
-
+  requestPage('http://www.freecodecamp.com/the-fastest-web-page-on-the-internet').then(logTest).catch(context.fail);
+  requestPage('http://jsonplaceholder.typicode.com/users').then(logTest).then(context.succeed).catch(context.fail);
 
   //console.log('value1 =', event.key1);
   //console.log('value2 =', event.key2);
@@ -54,45 +48,12 @@ exports.handler = function(event, context) {
     //console.log("logTest");
     return new Promise(function(fulfill, reject){
       try {
-        var res = thing+" \nLOLOLOLO";
+        console.log(thing);
       } catch (err) {
         reject(err);
       }
-      fulfill(res);
+      fulfill(thing);
     });
   }
 
 };
-
-// function readFile(filename, enc){
-//   return new Promise(function(fulfill, reject){
-//     fs.readFile(filename, enc, function(err, res){
-//       if(err) reject(err);
-//       else fulfill(res);
-//     });
-//   });
-// }
-//
-// function requestPage(address){
-//   return new Promise(function(fulfill, reject){
-//     request(address, function(err, res, body){
-//       if(err) reject(err);
-//       else{
-//         fulfill(res.statusCode);
-//       }
-//     });
-//   });
-// }
-//
-// function logTest(thing){
-//   return new Promise(function(fulfill, reject){
-//     try {
-//       var res = thing+" LOLOLOLO";
-//     } catch (err) {
-//       reject(err);
-//     }
-//     fulfill(res);
-//   });
-// }
-
-//if(!other_argument) throw Error('Two args required');
