@@ -3,7 +3,8 @@ var fs = require('fs');
 var Promise = require('promise');
 var request = require('request');
 
-  requestPage('http://jsonplaceholder.typicode.com/users').then(logRes);
+  //requestPage('http://jsonplaceholder.typicode.com/users').then(parseJSON).catch(logRes).done(jsontest);
+  readFile('package.json','utf8').then(parseJSON).catch(logRes).done(jsontest);
 
 exports.handler = function(event, context) {
 
@@ -12,12 +13,22 @@ exports.handler = function(event, context) {
   requestPage('http://jsonplaceholder.typicode.com/users').then(logRes).then(context.succeed).catch(context.fail);
 };
 
+function jsontest(parsedJson){
+  console.log(parsedJson.version);
+  //return(true);
+  //console.log(parsedJson.id['2']);
+}
+
 function requestPage(address){
   return new Promise(function(fulfill, reject){
     request(address, function(err, res, body){
       if(err) reject(err);
       else{
-        fulfill(res.statusCode);
+        if (res.statusCode !== 200) {
+          reject('Invalid Status Code Returned:', res.statusCode);
+        }else{
+          fulfill(res.body);
+        }
       }
     });
   });
